@@ -98,6 +98,7 @@ export class JupyterLab extends JupyterFrontEnd<ILabShell> {
           this.shell.collapseLeft();
         } else {
           this.shell.expandLeft();
+          this.shell.expandRight();
         }
       }, this);
       Private.setFormat(this);
