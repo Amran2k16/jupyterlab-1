@@ -269,6 +269,10 @@ export namespace JupyterFrontEnd {
      */
     activateById(id: string): void;
 
+    // Custom additions
+    detachById(id: string): void;
+    rightHandlerHas(id: string): boolean;
+
     /**
      * Add a widget to the application shell.
      *
