@@ -461,6 +461,39 @@ export class LabShell extends Widget implements JupyterFrontEnd.IShell {
   }
 
   /**
+   * Check if the right side bar has a widget with id
+   */
+
+  rightHandlerHas(id: string): boolean {
+    if (this._rightHandler.has(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Detach a widget in its area by its Id.
+   */
+
+  detachById(id: string): void {
+    console.log('LabShell -> detachById -> id', id);
+
+    console.log(this._rightHandler);
+
+    if (this._leftHandler.has(id)) {
+      this._leftHandler.detach(id);
+      return;
+    }
+
+    if (this._rightHandler.has(id)) {
+      console.log('LabShell -> detachById -> id', id);
+      this._rightHandler.detach(id);
+      return;
+    }
+  }
+
+  /**
    * Activate a widget in its area.
    */
   activateById(id: string): void {
@@ -1243,6 +1276,16 @@ namespace Private {
       if (widget) {
         this._sideBar.currentTitle = widget.title;
         widget.activate();
+      }
+    }
+
+    detach(id: string): void {
+      const widget = this._findWidgetByID(id);
+      console.log('SideBarHandler -> detach -> widget', widget);
+
+      if (widget) {
+        this._sideBar.currentTitle = widget.title;
+        widget.close();
       }
     }
 
